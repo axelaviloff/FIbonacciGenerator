@@ -8,6 +8,7 @@ btnGerar.onclick = function () {
 
 function showSequence() {
     ctainer.innerHTML = "";
+
     if (Number(inptArea.value) < 0) {
         alert("Somente números inteiros positivos")
     } else if (Number(inptArea.value) % 1 !== 0) {
