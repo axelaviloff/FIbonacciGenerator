@@ -21,3 +21,19 @@ body {
 main {
     flex: 1 0 auto;
 }
+input {
+    size: 20px;
+}
+#gitimg {
+    position: relative;
+    top: 13px;
+    left: 1315px;
+    height: 30px;
+    width: 30px;
+}
+
+#created {
+    align-self: center;
+    position: relative;
+    bottom: 30px;
+}
