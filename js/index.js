@@ -7,15 +7,22 @@ var btnHelp = document.querySelector("a#help");
 btnHelp.onmouseenter = function () {
     ctainer.innerHTML = "";
     var p = document.createElement("p");
-   p.setAttribute("text-align", "center");
-   p.appendChild(document.createTextNode("Txt about fibonacci."));
-   p.style.color = "white";
-    ctainer.setAttribute("class", "#000000 black");
+    var p2 = document.createElement("p");
+    var img = document.createElement("img");
+    img.setAttribute("src", "img/fib.png");
+    p.appendChild(document.createTextNode("Sequência de fibonacci é infinita e começa com 0 e 1."));
+    p2.appendChild(document.createTextNode("Onde o termo sucessor consiste na soma dos dois termos anteriores."));
+    img.style.width = "200px";
+    p.style.color = "black";
+    p.style.textAlign = "left";
+    p2.style.color = "black";
+    p2.style.textAlign = "left";
     ctainer.appendChild(p);
+    ctainer.appendChild(img);
+    ctainer.appendChild(p2)
 };
 btnHelp.onmouseleave = function () {
     ctainer.innerHTML = "";
-    ctainer.removeAttribute("class", "#000000 black");
 };
 
 btnGerar.onclick = function () {
@@ -25,7 +32,7 @@ btnGerar.onclick = function () {
 function showSequence() {
     ctainer.innerHTML = "";
     ctainer.setAttribute("class", "#e0f2f1 teal lighten-5 col s12");
-    if (Number(inptArea.value) < 0) {
+    if (Number(inptArea.value) <= 0) {
         alert("Somente números inteiros positivos")
     } else if (Number(inptArea.value) % 1 !== 0) {
         alert("Somente números inteiros positivos")
