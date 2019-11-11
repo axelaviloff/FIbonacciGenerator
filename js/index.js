@@ -1,6 +1,22 @@
 var inptArea = document.querySelector("input.validate");
 var btnGerar = document.querySelector("body.s12 a#al");
 var ctainer = document.querySelector("div#main_container");
+var btnHelp = document.querySelector("a#help");
+
+
+btnHelp.onmouseenter = function () {
+    ctainer.innerHTML = "";
+    var p = document.createElement("p");
+   p.setAttribute("text-align", "center");
+   p.appendChild(document.createTextNode("Txt about fibonacci."));
+   p.style.color = "white";
+    ctainer.setAttribute("class", "#000000 black");
+    ctainer.appendChild(p);
+};
+btnHelp.onmouseleave = function () {
+    ctainer.innerHTML = "";
+    ctainer.removeAttribute("class", "#000000 black");
+};
 
 btnGerar.onclick = function () {
     showSequence();
@@ -8,7 +24,7 @@ btnGerar.onclick = function () {
 
 function showSequence() {
     ctainer.innerHTML = "";
-
+    ctainer.setAttribute("class", "#e0f2f1 teal lighten-5 col s12");
     if (Number(inptArea.value) < 0) {
         alert("Somente números inteiros positivos")
     } else if (Number(inptArea.value) % 1 !== 0) {
