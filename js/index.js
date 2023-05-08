@@ -1,14 +1,13 @@
-var inptArea = document.querySelector("input.validate");
-var btnGerar = document.querySelector("body.s12 a#al");
-var ctainer = document.querySelector("div#main_container");
-var btnHelp = document.querySelector("a#help");
+const inputArea = document.querySelector("input.validate");
+const buttonGenerate = document.querySelector("body.s12 a#al");
+const container = document.querySelector("div#main_container");
+const buttonHelp = document.querySelector("a#help");
 
-
-btnHelp.onmouseenter = function () {
-    ctainer.innerHTML = "";
-    var p = document.createElement("p");
-    var p2 = document.createElement("p");
-    var img = document.createElement("img");
+function showHelp() {
+    container.innerHTML = "";
+    const p = document.createElement("p");
+    const p2 = document.createElement("p");
+    const img = document.createElement("img");
     img.setAttribute("src", "img/fib.png");
     p.appendChild(document.createTextNode("Sequência de fibonacci é infinita e começa com 0 e 1."));
     p2.appendChild(document.createTextNode("Onde o termo sucessor consiste na soma dos dois termos anteriores."));
@@ -17,68 +16,52 @@ btnHelp.onmouseenter = function () {
     p.style.textAlign = "left";
     p2.style.color = "black";
     p2.style.textAlign = "left";
-    ctainer.appendChild(p);
-    ctainer.appendChild(img);
-    ctainer.appendChild(p2)
-};
-btnHelp.onmouseleave = function () {
-    ctainer.innerHTML = "";
-};
+    container.appendChild(p);
+    container.appendChild(img);
+    container.appendChild(p2)
+}
 
-btnGerar.onclick = function () {
-    showSequence();
-};
+function generateFibonacciSequence(num) {
+    const fibNumbers = [0, 1];
 
-function showSequence() {
-    ctainer.innerHTML = "";
-    ctainer.setAttribute("class", "#e0f2f1 teal lighten-5 col s12");
-    if (Number(inptArea.value) <= 0) {
-        alert("Somente números inteiros positivos")
-    } else if (Number(inptArea.value) % 1 !== 0) {
-        alert("Somente números inteiros positivos")
+    for (let i = 2; i <= num; i++) {
+        const fib = fibNumbers[i-1] + fibNumbers[i-2];
+        fibNumbers.push(fib);
+    }
+
+    return fibNumbers;
+}
+
+function displayFibonacciNumbers(numbers) {
+    container.innerHTML = "";
+    container.classList.add("#e0f2f1", "teal", "lighten-5", "col", "s12");
+
+    numbers.forEach((num, index) => {
+        const p = document.createElement("p");
+        const text = document.createTextNode(`F(${index}) = ${num}`);
+        p.appendChild(text);
+        container.appendChild(p);
+    });
+}
+
+function showAlert() {
+    alert("Somente números inteiros positivos");
+}
+
+function handleGenerateClick() {
+    const input = Number(inputArea.value);
+    if (isValidInput(input)) {
+        const fibNumbers = generateFibonacciSequence(input);
+        displayFibonacciNumbers(fibNumbers);
     } else {
-        generateFibonnaci(Number(inptArea.value))
+        showAlert();
     }
 }
 
-function generateFibonnaci(num) {
-    var num1 = 0;
-    var num2 = 1;
-    var fib = 1;
-    if (num === 0) {
-        var p = document.createElement("p");
-        var text = document.createTextNode("F(0) = 0");
-        p.appendChild(text);
-        ctainer.appendChild(p);
-    } else if (num === 1) {
-        var p = document.createElement("p");
-        var text = document.createTextNode("F(0) = 0");
-        p.appendChild(text);
-        ctainer.appendChild(p);
-        var p = document.createElement("p");
-        var text = document.createTextNode("F(1) = 1");
-        p.appendChild(text);
-        ctainer.appendChild(p);
-    } else {
-        var p = document.createElement("p");
-        var text = document.createTextNode("F(0) = 0");
-        p.appendChild(text);
-        ctainer.appendChild(p);
-        var p = document.createElement("p");
-        var text = document.createTextNode("F(1) = 1");
-        p.appendChild(text);
-        ctainer.appendChild(p);
-        for (var i = 2; i<=num;i++) {
-            fib = num1+num2;
-            num1 = num2;
-            num2 = fib;
-            var p = document.createElement("p");
-            var text = document.createTextNode("F("+i+") = "+fib);
-            p.appendChild(text);
-            ctainer.appendChild(p);
-        }
-    }
+function isValidInput(input) {
+    return Number.isInteger(input) && input > 0;
 }
 
-
-
+buttonHelp.onmouseenter = showHelp;
+buttonHelp.onmouseleave = () => container.innerHTML = "";
+buttonGenerate.onclick = handleGenerateClick;
